@@ -21,6 +21,7 @@ public class PlayerDrive : MonoBehaviour
         if (m != movementDirection) {
             movementDirection = m;
             tank.MoveInDirection(movementDirection);
+            tank.AimInDirection(movementDirection);
         }
     }
 }
