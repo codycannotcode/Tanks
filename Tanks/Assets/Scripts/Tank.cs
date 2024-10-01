@@ -27,7 +27,7 @@ public class Tank : MonoBehaviour
         targetVelocity = direction.normalized * speed;
 
         if (direction != Vector3.zero) {
-            Vector3 lookDirection = Vector3.Angle(direction, tankBase.transform.forward) < 90 ? direction : direction * -1;
+            Vector3 lookDirection = Vector3.Angle(direction, tankBase.transform.forward) < 105 ? direction : direction * -1;
 
             targetRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
         }
@@ -35,8 +35,14 @@ public class Tank : MonoBehaviour
 
     public void AimInDirection(Vector3 direction) {
         direction.y = 0;
+        targetAim = Quaternion.LookRotation(direction);
+    }
 
-        targetAim = Quaternion.LookRotation(direction, Vector3.up);
+    public void SetAimDirection(Vector3 direction) {
+        direction.y = 0;
+        Quaternion quat = Quaternion.LookRotation(direction);
+        targetAim = quat;
+        tankHead.transform.rotation = quat;
     }
 
     void Update() {

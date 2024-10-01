@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDrive : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Tank tank;
     private Vector3 movementDirection;
@@ -21,7 +21,13 @@ public class PlayerDrive : MonoBehaviour
         if (m != movementDirection) {
             movementDirection = m;
             tank.MoveInDirection(movementDirection);
-            tank.AimInDirection(movementDirection);
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
+            Vector3 aimDirection = hitInfo.point - tank.transform.position;
+            aimDirection.y = 0;
+            tank.SetAimDirection(aimDirection);
         }
     }
 }
