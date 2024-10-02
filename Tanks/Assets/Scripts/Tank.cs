@@ -50,7 +50,7 @@ public class Tank : MonoBehaviour
 
     public void FireProjectile() {
         GameObject projectile = Instantiate<GameObject>(projectilePrefab);
-        projectile.transform.position = tankHead.transform.position + new Vector3(0, 0, 3);
+        projectile.transform.position = tankHead.transform.position + tankHead.transform.forward;
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
     }
 
