@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class Tank : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject projectilePrefab;
 
     [SerializeField]
-    private float speed = 10;
+    private float speed = 3;
     private Vector3 velocity;
     private Vector3 targetVelocity;
     private Quaternion targetRotation;
     private Quaternion targetAim;
+    
 
-    private GameObject tankBase;
+    // private GameObject tankBase;
     private GameObject tankHead;
     
     void Start()
     {
-        tankBase = transform.Find("Base").gameObject;
+        // tankBase = transform.Find("Base").gameObject;
         tankHead = transform.Find("Head").gameObject;
     }
 
@@ -27,7 +30,7 @@ public class Tank : MonoBehaviour
         targetVelocity = direction.normalized * speed;
 
         if (direction != Vector3.zero) {
-            Vector3 lookDirection = Vector3.Angle(direction, tankBase.transform.forward) < 105 ? direction : direction * -1;
+            Vector3 lookDirection = Vector3.Angle(direction, transform.forward) < 105 ? direction : direction * -1;
 
             targetRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
         }
@@ -45,12 +48,18 @@ public class Tank : MonoBehaviour
         tankHead.transform.rotation = quat;
     }
 
+    public void FireProjectile() {
+        GameObject projectile = Instantiate<GameObject>(projectilePrefab);
+        projectile.transform.position = tankHead.transform.position + new Vector3(0, 0, 3);
+        projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
+    }
+
     void Update() {
         if (velocity != targetVelocity) {
             velocity = Vector3.Lerp(velocity, targetVelocity, Time.deltaTime * 10);
         }
         if (targetVelocity != Vector3.zero) {
-            tankBase.transform.rotation = Quaternion.Lerp(tankBase.transform.rotation, targetRotation, Time.deltaTime * 7);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7);
         }
         transform.position = transform.position + (velocity * Time.deltaTime);
 

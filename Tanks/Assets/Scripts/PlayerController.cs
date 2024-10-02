@@ -25,9 +25,13 @@ public class PlayerController : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
-            Vector3 aimDirection = hitInfo.point - tank.transform.position;
+            Vector3 aimDirection = hitInfo.point - transform.position;
             aimDirection.y = 0;
             tank.SetAimDirection(aimDirection);
+        }
+
+        if (Input.GetMouseButtonDown(0)) {
+            tank.FireProjectile();
         }
     }
 }
