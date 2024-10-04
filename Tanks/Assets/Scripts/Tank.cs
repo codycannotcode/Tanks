@@ -54,6 +54,11 @@ public class Tank : MonoBehaviour
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
     }
 
+    public void DestroyTank()
+    {
+        Destroy(gameObject);
+    }
+
     void Update() {
         if (velocity != targetVelocity) {
             velocity = Vector3.Lerp(velocity, targetVelocity, Time.deltaTime * 10);

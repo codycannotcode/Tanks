@@ -109,7 +109,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &8505177098225346455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5105a2aa9c817ef4685a739b23ac837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4784062392404610038, guid: baf389e8f93ad23488a794930cacf33a, type: 3}
+  projectilePrefab: {fileID: 6064659003114813775, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
   speed: 3
 --- !u!114 &4720985166397454214
 MonoBehaviour:
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3924881934235778467}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dace920b0654d5443ad59fdb7e5af73c, type: 3}
   m_Name: 
