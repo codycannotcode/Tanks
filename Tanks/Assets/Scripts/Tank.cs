@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Tank : MonoBehaviour
+public class Tank : MonoBehaviour, Hittable
 {
     [SerializeField]
     private GameObject projectilePrefab;
@@ -54,8 +54,7 @@ public class Tank : MonoBehaviour
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
     }
 
-    public void DestroyTank()
-    {
+    public void OnHit() {
         Destroy(gameObject);
     }
 
