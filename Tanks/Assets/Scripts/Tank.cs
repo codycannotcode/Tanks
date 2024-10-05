@@ -14,6 +14,7 @@ public class Tank : MonoBehaviour, Hittable
     private Vector3 targetVelocity;
     private Quaternion targetRotation;
     private Quaternion targetAim;
+    private bool projectileQueued;
     
 
     // private GameObject tankBase;
@@ -54,6 +55,11 @@ public class Tank : MonoBehaviour, Hittable
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
     }
 
+    // Queue a projectile to be shot after turning
+    public void QueueProjectile() {
+        projectileQueued = true;
+    }
+
     public void OnHit() {
         Destroy(gameObject);
     }
@@ -69,6 +75,10 @@ public class Tank : MonoBehaviour, Hittable
 
         if (targetAim != tankHead.transform.rotation) {
             tankHead.transform.rotation = Quaternion.RotateTowards(tankHead.transform.rotation, targetAim, Time.deltaTime * 360);
+        }
+        else if (projectileQueued) {
+            FireProjectile();
+            projectileQueued = false;
         }
     }
 }
