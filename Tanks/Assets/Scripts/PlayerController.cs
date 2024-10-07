@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         Vector3 m = new Vector3(horizontal, 0, vertical);
         if (m != movementDirection) {
             movementDirection = m;
-            tank.MoveInDirection(movementDirection);
+            tank.SetMovementDirection(movementDirection);
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -26,7 +26,7 @@ public class Tank : MonoBehaviour, Hittable
         tankHead = transform.Find("Head").gameObject;
     }
 
-    public void MoveInDirection(Vector3 direction) {
+    public void SetMovementDirection(Vector3 direction) {
         direction.y = 0;
         targetVelocity = direction.normalized * speed;
 
