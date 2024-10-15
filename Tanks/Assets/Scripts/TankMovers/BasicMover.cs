@@ -28,6 +28,7 @@ public class BasicMover : MonoBehaviour
         Collider[] collidingWalls = Physics.OverlapSphere(tank.transform.position, 1.2f, wallLayerMask);
 
         if (collidingWalls.Length > 0) {
+            Debug.Log(collidingWalls[0]);
             Vector3 awayFromWall = tank.transform.position - collidingWalls[0].ClosestPoint(tank.transform.position);
             //copied and pasted, might want to make this code reusable later
             float rotateAngle = Random.Range(-60 * Mathf.Deg2Rad, 60 * Mathf.Deg2Rad);

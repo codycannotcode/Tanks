@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.25
       objectReference: {fileID: 0}
     - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_LocalPosition.y
@@ -51,6 +51,22 @@ PrefabInstance:
     - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_Name
       value: BrownTank Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024138559385066139, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589335125334511837, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077956251654139848, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

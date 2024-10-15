@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 286335846679685990}
   - component: {fileID: 8505177098225346455}
   - component: {fileID: 7103724952168534427}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 867235642711454264}
   - component: {fileID: 1662284618662527734}
   - component: {fileID: 8567331226811294925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 7757434344014491734}
   - component: {fileID: 5823855320052240625}
   - component: {fileID: 7062527983499430750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 6861299937571721687}
   - component: {fileID: 6445730185231301242}
   - component: {fileID: 5062113218754715088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
