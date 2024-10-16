@@ -9,9 +9,10 @@ public class Tank : MonoBehaviour, Hittable
     private GameObject projectilePrefab;
 
     [SerializeField]
-    private float speed = 3;
+    public float speed = 3;
     private Vector3 velocity;
     private Vector3 targetVelocity;
+    private bool overrideVelocity = false;
     private Quaternion targetRotation;
     private Quaternion targetAim;
     private bool projectileQueued;
@@ -30,6 +31,19 @@ public class Tank : MonoBehaviour, Hittable
         direction.y = 0;
         targetVelocity = direction.normalized * speed;
 
+        SetWheelRotation(direction);   
+    }
+
+    // manually override velocity. allows for NavMeshAgent to override movement
+    public void SetVelocity(Vector3 velocity) {
+        velocity.y = 0;
+        this.velocity = velocity;
+        overrideVelocity = true;
+
+        SetWheelRotation(velocity.normalized * speed);
+    }
+
+    public void SetWheelRotation(Vector3 direction) {
         if (direction != Vector3.zero) {
             Vector3 lookDirection = Vector3.Angle(direction, transform.forward) < 105 ? direction : direction * -1;
 
@@ -65,13 +79,15 @@ public class Tank : MonoBehaviour, Hittable
     }
 
     void Update() {
-        if (velocity != targetVelocity) {
+        if (!overrideVelocity && velocity != targetVelocity) {
             velocity = Vector3.Lerp(velocity, targetVelocity, Time.deltaTime * 10);
         }
-        if (targetVelocity != Vector3.zero) {
+        if (velocity != Vector3.zero) {
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7);
         }
-        transform.position = transform.position + (velocity * Time.deltaTime);
+        if (!overrideVelocity) {
+            transform.position = transform.position + (velocity * Time.deltaTime);
+        }   
 
         if (targetAim != tankHead.transform.rotation) {
             tankHead.transform.rotation = Quaternion.RotateTowards(tankHead.transform.rotation, targetAim, Time.deltaTime * 360);
