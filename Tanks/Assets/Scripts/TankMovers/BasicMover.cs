@@ -6,9 +6,36 @@ using UnityEngine.AI;
 
 public class BasicMover : MonoBehaviour
 {
+    private Vector3 target;
+    private bool moving = false;
     private Tank tank;
     private NavMeshAgent agent;
-    // Start is called before the first frame update
+    
+    void SetTarget(Vector3 destination)
+    {
+        target = destination;
+        agent.SetDestination(target);
+        moving = true;
+    }
+
+    bool RandomPoint(Vector3 center, out Vector3 result)
+    {
+        float range = 10.0f;
+
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 randomPoint = center + Random.insideUnitSphere * range;
+            randomPoint.y = 0;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
+        }
+        result = Vector3.zero;
+        return false;
+    }
     void Start()
     {
 
@@ -18,24 +45,30 @@ public class BasicMover : MonoBehaviour
         agent.speed = 3;
         agent.angularSpeed = 0;
         agent.updateRotation = false;
-        Vector3 target = transform.position;
+        target = transform.position;
         target.x = 9;
-        
-        float range = 10f;
-        Vector3 randomPoint = tank.transform.position + Random.insideUnitSphere * range;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) {
-            Debug.Log(hit.position);
-        }
-
-        agent.SetDestination(target);
-        
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        tank.SetVelocity(agent.velocity);
+        if (moving) {
+            Vector3 distanceFromTarget = transform.position - target;
+            distanceFromTarget.y = 0;
+            if (distanceFromTarget == Vector3.zero) {
+                moving = false;
+                Debug.Log("finished moving");
+            }
+            else {
+                tank.SetVelocity(agent.velocity);
+            }
+        }
+        
+        if (Input.GetMouseButtonDown(1)) {
+            Vector3 result;
+            RandomPoint(transform.position, out result);
+            Debug.Log(result);
+            SetTarget(result);
+        }
     }
 }
