@@ -27,7 +27,6 @@ public class DumbShooter : MonoBehaviour
     }
 
     void TryToFire() {
-        // tank.QueueProjectile();
-        Debug.Log("FIRE A BLANK");
+        tank.QueueProjectile();
     }
 }

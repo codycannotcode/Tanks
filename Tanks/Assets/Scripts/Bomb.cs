@@ -6,8 +6,8 @@ public class Bomb : MonoBehaviour, Hittable
 {
     [SerializeField]
     private GameObject explosionObject;
-    private float explosionTime = 10; // seconds until the bomb explodes
-    private float flashTime = 3; // seconds before explosion when bomb starts flashing
+    private float explosionTime = 5; // seconds until the bomb explodes
+    private float flashTime = 1.5f; // seconds before explosion when bomb starts flashing
     private int layerMask;
     
     void Start()
@@ -18,9 +18,22 @@ public class Bomb : MonoBehaviour, Hittable
 
     IEnumerator PrepareToExplode() {
         yield return new WaitForSeconds(explosionTime - flashTime);
-        Debug.Log("start flashing");
+        StartCoroutine(Flash());
         yield return new WaitForSeconds(flashTime);
         Explode();
+    }
+
+    IEnumerator Flash() {
+        Debug.Log("start flashing");
+        bool flash = false;
+        Material material = GetComponent<Renderer>().material;
+        Color regular = material.color;
+        Color flashColor = Color.red;
+        while (true) {
+            flash = !flash;
+            material.color = flash ? flashColor : regular;
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
     void Explode() {

@@ -7,7 +7,7 @@ public class BasicMover : MonoBehaviour
 {
     private Vector3 target;
     private bool moving = false;
-    private float[] moveDelay = {0.5f, 4f};
+    private float[] moveDelay = {0f, 1f};
     private Tank tank;
     private NavMeshAgent agent;
     
