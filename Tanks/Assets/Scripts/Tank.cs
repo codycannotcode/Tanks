@@ -11,21 +11,23 @@ public class Tank : MonoBehaviour, Hittable
     private GameObject bombPrefab;
 
     [SerializeField]
-    public float speed = 3;
+    public float speed;
+    [SerializeField]
+    private float reloadTime;
     private Vector3 velocity;
     private Vector3 targetVelocity;
     private bool overrideVelocity = false;
     private Quaternion targetRotation;
     private Quaternion targetAim;
-    private bool projectileQueued;
-    
+    private bool projectileQueued; // used to fire projectiles after the tank is finished rotating
+    public bool reloaded { get; private set; }
 
     // private GameObject tankBase;
     private GameObject tankHead;
     
     void Start()
     {
-        // tankBase = transform.Find("Base").gameObject;
+        reloaded = true;
         tankHead = transform.Find("Head").gameObject;
     }
 
@@ -66,10 +68,21 @@ public class Tank : MonoBehaviour, Hittable
         tankHead.transform.rotation = quat;
     }
 
-    public void FireProjectile() {
+    public bool FireProjectile() {
+        if (!reloaded) {
+            return false;
+        }
         GameObject projectile = Instantiate<GameObject>(projectilePrefab);
         projectile.transform.position = tankHead.transform.position + tankHead.transform.forward;
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
+        reloaded = false;
+        StartCoroutine(Reload());
+        return true;
+    }
+
+    IEnumerator Reload() {
+        yield return new WaitForSeconds(reloadTime);
+        reloaded = true;
     }
 
     // Queue a projectile to be shot after turning
@@ -97,9 +110,7 @@ public class Tank : MonoBehaviour, Hittable
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7);
         }
         if (!overrideVelocity) {
-            // Debug.Log(transform.position);
             transform.position = transform.position + (velocity * Time.deltaTime);
-            // Debug.Log(transform.position);
         }   
 
         if (targetAim != tankHead.transform.rotation) {

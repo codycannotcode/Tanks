@@ -24,7 +24,6 @@ public class Bomb : MonoBehaviour, Hittable
     }
 
     IEnumerator Flash() {
-        Debug.Log("start flashing");
         bool flash = false;
         Material material = GetComponent<Renderer>().material;
         Color regular = material.color;

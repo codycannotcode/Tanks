@@ -48,7 +48,6 @@ public class BasicMover : MonoBehaviour
 
     void Start()
     {
-
         tank = GetComponent<Tank>();
 
         agent = GetComponent<NavMeshAgent>();
