@@ -67,7 +67,6 @@ public class BasicMover : MonoBehaviour
             if (distanceFromTarget.sqrMagnitude < 0.05f) {
                 moving = false;
                 agent.isStopped = true;
-                Debug.Log("finished moving");
             }
             else {
                 tank.SetVelocity(agent.velocity);

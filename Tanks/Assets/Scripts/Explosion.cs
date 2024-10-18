@@ -21,7 +21,6 @@ public class Explosion : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(material.color);
         currentFade += Time.deltaTime;
         if (currentFade > fadeTime) {
             Destroy(gameObject);
