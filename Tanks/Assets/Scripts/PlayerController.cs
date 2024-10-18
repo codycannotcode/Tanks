@@ -33,5 +33,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             tank.FireProjectile();
         }
+        if (Input.GetMouseButtonDown(1)) {
+            tank.PlaceBomb();
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,20 +7,20 @@ public class BasicMover : MonoBehaviour
 {
     private Vector3 target;
     private bool moving = false;
+    private float[] moveDelay = {0.5f, 4f};
     private Tank tank;
     private NavMeshAgent agent;
     
     void SetTarget(Vector3 destination)
     {
         target = destination;
+        agent.isStopped = false;
         agent.SetDestination(target);
         moving = true;
     }
 
-    bool RandomPoint(Vector3 center, out Vector3 result)
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-        float range = 10.0f;
-
         for (int i = 0; i < 30; i++)
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
@@ -36,6 +35,17 @@ public class BasicMover : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
+
+    IEnumerator ChooseNewTarget() {
+        Vector3 result;
+        RandomPoint(transform.position, 10f, out result);
+        SetTarget(result);
+
+        yield return new WaitUntil(() => !moving);
+        yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
+        StartCoroutine(ChooseNewTarget());
+    }
+
     void Start()
     {
 
@@ -45,30 +55,26 @@ public class BasicMover : MonoBehaviour
         agent.speed = 3;
         agent.angularSpeed = 0;
         agent.updateRotation = false;
-        target = transform.position;
-        target.x = 9;
+
+        StartCoroutine(ChooseNewTarget());
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (moving) {
             Vector3 distanceFromTarget = transform.position - target;
             distanceFromTarget.y = 0;
-            if (distanceFromTarget == Vector3.zero) {
+            if (distanceFromTarget.sqrMagnitude < 0.05f) {
                 moving = false;
+                agent.isStopped = true;
                 Debug.Log("finished moving");
             }
             else {
                 tank.SetVelocity(agent.velocity);
             }
         }
-        
-        if (Input.GetMouseButtonDown(1)) {
-            Vector3 result;
-            RandomPoint(transform.position, out result);
-            Debug.Log(result);
-            SetTarget(result);
+        else {
+            tank.SetMovementDirection(Vector3.zero);
         }
     }
 }

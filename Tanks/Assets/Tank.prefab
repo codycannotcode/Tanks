@@ -118,7 +118,7 @@ Rigidbody:
   m_GameObject: {fileID: 3924881934235778467}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6064659003114813775, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
+  bombPrefab: {fileID: 2482545000612290218, guid: 968727eb2a50d2e46adb352edcc0699d, type: 3}
   speed: 3
 --- !u!1 &4024138559385066139
 GameObject:

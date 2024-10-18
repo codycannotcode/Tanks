@@ -7,6 +7,8 @@ public class Tank : MonoBehaviour, Hittable
 {
     [SerializeField]
     private GameObject projectilePrefab;
+    [SerializeField]
+    private GameObject bombPrefab;
 
     [SerializeField]
     public float speed = 3;
@@ -30,6 +32,7 @@ public class Tank : MonoBehaviour, Hittable
     public void SetMovementDirection(Vector3 direction) {
         direction.y = 0;
         targetVelocity = direction.normalized * speed;
+        overrideVelocity = false;
 
         SetWheelRotation(direction);   
     }
@@ -74,19 +77,29 @@ public class Tank : MonoBehaviour, Hittable
         projectileQueued = true;
     }
 
+    public void PlaceBomb() {
+        GameObject bomb = Instantiate(bombPrefab);
+        Vector3 position = transform.position;
+        position.y = 0;
+        bomb.transform.position = position;
+    }
+
     public void OnHit() {
         Destroy(gameObject);
     }
 
     void Update() {
         if (!overrideVelocity && velocity != targetVelocity) {
+            
             velocity = Vector3.Lerp(velocity, targetVelocity, Time.deltaTime * 10);
         }
         if (velocity != Vector3.zero) {
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7);
         }
         if (!overrideVelocity) {
+            // Debug.Log(transform.position);
             transform.position = transform.position + (velocity * Time.deltaTime);
+            // Debug.Log(transform.position);
         }   
 
         if (targetAim != tankHead.transform.rotation) {
