@@ -11,7 +11,7 @@ public class Tank : MonoBehaviour, Hittable
     private GameObject bombPrefab;
 
     [SerializeField]
-    public float speed;
+    private float speed;
     [SerializeField]
     private float reloadTime;
     private Vector3 velocity;
@@ -21,6 +21,8 @@ public class Tank : MonoBehaviour, Hittable
     private Quaternion targetAim;
     private bool projectileQueued; // used to fire projectiles after the tank is finished rotating
     public bool reloaded { get; private set; }
+
+    public GameObject Projectile { get {return projectilePrefab;} }
 
     // private GameObject tankBase;
     private GameObject tankHead;
@@ -72,8 +74,13 @@ public class Tank : MonoBehaviour, Hittable
         if (!reloaded) {
             return false;
         }
+        Vector3 projectilePosition = tankHead.transform.position + tankHead.transform.forward * 0.85f;
+        if (!Bullet.CanSpawnAtPosition(projectilePosition)) {
+            return false;
+        }
+
         GameObject projectile = Instantiate<GameObject>(projectilePrefab);
-        projectile.transform.position = tankHead.transform.position + tankHead.transform.forward;
+        projectile.transform.position = projectilePosition;
         projectile.transform.rotation = Quaternion.LookRotation(tankHead.transform.forward);
         reloaded = false;
         StartCoroutine(Reload());

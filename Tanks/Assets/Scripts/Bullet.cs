@@ -11,11 +11,18 @@ public class Bullet : MonoBehaviour, Hittable
 {
     [SerializeField]
     private float speed;
-    private int bounces = 1;
+    [SerializeField]
+    private int bounces;
+    public int Bounces { get {return bounces;} }
+    
+    private static int layerMask;
+    private static float thickness = 0.125f;
 
     public void OnHit() {}
+    void Start() {
+        layerMask = LayerMask.GetMask("Walls");
+    }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
@@ -35,13 +42,16 @@ public class Bullet : MonoBehaviour, Hittable
             }
             else {
                 // Reflect bullet across normal of the surface it hit. 
-                // https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
                 ContactPoint contact = collision.GetContact(0);
-                Vector3 reflection = transform.forward - 2 * Vector3.Dot(transform.forward, contact.normal) * contact.normal;
+                Vector3 reflection = Vector3.Reflect(transform.forward, contact.normal);
 
                 transform.rotation = Quaternion.LookRotation(reflection);
                 bounces--;
             }
         }
+    }
+
+    public static bool CanSpawnAtPosition(Vector3 position) {
+        return !Physics.CheckSphere(position, thickness, layerMask);
     }
 }
