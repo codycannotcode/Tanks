@@ -19,7 +19,7 @@ public class BasicMover : MonoBehaviour
         moving = true;
     }
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    public static bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         for (int i = 0; i < 30; i++)
         {
