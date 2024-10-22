@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//drives toward player if it can't see it, then starts juking for a short time, then tries to drive toward player again if it can't see
 public class SeekingMover : MonoBehaviour
 {
     private bool canSeePlayer;
     private int layerMask;
     private Vector3 target;
     private bool moving = false;
+    private float[] moveDelay = {0f, 0.5f};
     private GameObject player;
     private Tank tank;
     private NavMeshAgent agent;
@@ -22,7 +24,24 @@ public class SeekingMover : MonoBehaviour
     }
 
     IEnumerator TrackPlayer() {
-        yield return null;
+        SetTarget(player.transform.position);
+        yield return new WaitUntil(() => canSeePlayer);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(ChooseRandomTargets());
+    }
+
+    IEnumerator ChooseRandomTargets() {
+        int minimumSpots = Random.Range(1, 5);
+        //randomly move around for 1-5 cycles, and then begin to track player once we can't see them anymore
+        for (int i = minimumSpots; i >= 0 || canSeePlayer; i--) {
+            Vector3 result;
+            BasicMover.RandomPoint(transform.position, 3f, out result);
+            SetTarget(result);
+
+            yield return new WaitUntil(() => !moving);
+            yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
+        }
+        StartCoroutine(TrackPlayer());
     }
 
     void Start()
@@ -37,13 +56,30 @@ public class SeekingMover : MonoBehaviour
         agent.angularSpeed = 0;
         agent.updateRotation = false;
 
-
+        StartCoroutine(TrackPlayer());
     }
 
     void Update()
     {
-        RaycastHit hit;
-        bool didHit = Physics.Raycast(transform.position, transform.forward, out hit, 20f, layerMask);
-        canSeePlayer = didHit && hit.collider.gameObject == player;
+        if (player != null) {
+            RaycastHit hit;
+            bool didHit = Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, 20f, layerMask);
+            canSeePlayer = didHit && hit.collider.gameObject == player;
+        }
+
+        if (moving) {
+            Vector3 distanceFromTarget = transform.position - target;
+            distanceFromTarget.y = 0;
+            if (distanceFromTarget.sqrMagnitude < 0.05f) {
+                moving = false;
+                agent.isStopped = true;
+            }
+            else {
+                tank.SetVelocity(agent.velocity);
+            }
+        }
+        else {
+            tank.SetMovementDirection(Vector3.zero);
+        }
     }
 }

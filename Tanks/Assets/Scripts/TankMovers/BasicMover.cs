@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//moves to random spots within a 10 unit range
 public class BasicMover : MonoBehaviour
 {
     private Vector3 target;
