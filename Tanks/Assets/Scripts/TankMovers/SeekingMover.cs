@@ -24,9 +24,11 @@ public class SeekingMover : MonoBehaviour
     }
 
     IEnumerator TrackPlayer() {
-        SetTarget(player.transform.position);
-        yield return new WaitUntil(() => canSeePlayer);
-        yield return new WaitForSeconds(0.5f);
+        while (!canSeePlayer) {
+            SetTarget(player.transform.position);
+            yield return null;
+        }
+        yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
         StartCoroutine(ChooseRandomTargets());
     }
 
@@ -39,7 +41,9 @@ public class SeekingMover : MonoBehaviour
             SetTarget(result);
 
             yield return new WaitUntil(() => !moving);
+            Debug.Log("1");
             yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
+            Debug.Log("2");
         }
         StartCoroutine(TrackPlayer());
     }

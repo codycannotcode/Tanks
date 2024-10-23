@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4394343229589254077
+--- !u!1001 &918968470349002795
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -49,36 +49,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3171723277283308319, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 4734868862669877581, guid: f119d8f712629a04ba65b8efae6aa7a1, type: 3}
-    - target: {fileID: 3171723277283308319, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 6717caece94deea499b92326904eafe4, type: 2}
+      objectReference: {fileID: 2100000, guid: 55d07794cf5cae04990b7a95ca6294bf, type: 2}
     - target: {fileID: 3544149482388605197, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6717caece94deea499b92326904eafe4, type: 2}
+      objectReference: {fileID: 2100000, guid: 55d07794cf5cae04990b7a95ca6294bf, type: 2}
     - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_Name
-      value: BrownTank Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4024138559385066139, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4589335125334511837, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077956251654139848, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-      propertyPath: m_Layer
-      value: 7
+      value: GreyTank Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -86,22 +66,37 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 443960085241168048}
+      addedObject: {fileID: 4399229471871385733}
+    - targetCorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4854631835398857991}
   m_SourcePrefab: {fileID: 100100000, guid: 143224c2d38be5d4e992071894c61193, type: 3}
---- !u!1 &760031578385011230 stripped
+--- !u!1 &4230902771149637000 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
-  m_PrefabInstance: {fileID: 4394343229589254077}
+  m_PrefabInstance: {fileID: 918968470349002795}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &443960085241168048
+--- !u!114 &4399229471871385733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 760031578385011230}
+  m_GameObject: {fileID: 4230902771149637000}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15a0d93980c3eda47bfd319431b1a619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4854631835398857991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230902771149637000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152a12be6a1cb7642a659c7b9d87565b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
