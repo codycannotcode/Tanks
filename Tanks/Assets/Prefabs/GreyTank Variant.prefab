@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreyTank Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4891039800278899808, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -12,7 +12,7 @@ public class Bomb : MonoBehaviour, Hittable
     
     void Start()
     {
-        layerMask = LayerMask.GetMask("Tanks", "Bombs");
+        layerMask = LayerMask.GetMask("Tanks", "Bombs", "Walls");
         StartCoroutine(PrepareToExplode());
     }
 
@@ -53,6 +53,9 @@ public class Bomb : MonoBehaviour, Hittable
 
             if (hittable != null) {
                 hittable.OnHit();
+            }
+            else if (collider.gameObject.tag == "ExplodableWall") {
+                Destroy(collider.gameObject);
             }
         }
     }
