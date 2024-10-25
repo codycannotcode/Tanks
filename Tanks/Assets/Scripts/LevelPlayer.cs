@@ -4,17 +4,37 @@ using UnityEngine;
 
 public class LevelPlayer : MonoBehaviour
 {
-    private LevelGenerator levelGenerator;
     [SerializeField]
-    private GameObject test;
+    private GameObject levelPrefab;
+    [SerializeField]
+    private GameObject playerPrefab;
+    [SerializeField]
+    private List<GameObject> tankPrefabs;
+    
+    private LevelGenerator levelGenerator;
+    
+    private GameObject player;
+    private Transform enemiesFolder;
     
     void Start() {
+        enemiesFolder = GameObject.Find("Enemies").transform;
         levelGenerator = GetComponent<LevelGenerator>();
-
         Load();
     }
 
     void Load() {
-        levelGenerator.Generate(test);
+        levelGenerator.Generate(levelPrefab);
+        player = Instantiate(playerPrefab);
+        for (int i = 0; i < 3; i++) {
+            GameObject tank = Instantiate(tankPrefabs[0]);
+            tank.transform.position = tank.transform.position + new Vector3(3 * (i + 1), 0, 0);
+            tank.transform.parent = enemiesFolder;
+        }
+        StartCoroutine(WaitForLevelEnd());
+    }
+
+    IEnumerator WaitForLevelEnd() {
+        yield return new WaitUntil(() => player == null || enemiesFolder.childCount <= 0);
+        Debug.Log("chungus");
     }
 }
