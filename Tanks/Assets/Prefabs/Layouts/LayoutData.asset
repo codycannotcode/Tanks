@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10b5c7aec21bd847811984bd3f5b6df, type: 3}
   m_Name: LayoutData
   m_EditorClassIdentifier: 
-  size1x1: []
-  size1x2: []
-  size2x1: []
-  size2x2: []
+  size1x1:
+  - {fileID: 1816950270456653530, guid: e64b93d97743e7b49b33a299ea8bbd58, type: 3}
+  - {fileID: 1192300050972864074, guid: bbb84c7bfd1eaf545ad3556c130fd903, type: 3}
+  size1x2:
+  - {fileID: 3299720725926710253, guid: 38bc0a9202aa8fa4da603a1d2a5ad997, type: 3}
+  size2x1:
+  - {fileID: 5982842134758709218, guid: cefa8aa08821ed44f9f0f1bc8ab56ee0, type: 3}
+  size2x2:
+  - {fileID: 5207120240047355177, guid: a01a0efe5eada964f96835b9f21a4c37, type: 3}

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce6db1ca9ec0ae40b94b48d558355c5, type: 3}
   m_Name: TankData
   m_EditorClassIdentifier: 
-  playerTank: {fileID: 0}
-  weakTanks: []
+  playerTank: {fileID: 1172238131177190298, guid: 9d58dc51871658c4dbe270f35be54ccc, type: 3}
+  weakTanks:
+  - {fileID: 760031578385011230, guid: b02c8c8d0b94fa940956424b31abc92f, type: 3}
+  - {fileID: 4230902771149637000, guid: 7ab95eb01ad273f42b2c824cecc8c2dc, type: 3}
   regularTanks: []
   strongTanks: []

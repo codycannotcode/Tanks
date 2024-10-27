@@ -22,12 +22,12 @@ public class LevelPlayer : MonoBehaviour
 
     void Load() {
         levelGenerator.Generate();
-        player = Instantiate(playerPrefab);
-        for (int i = 0; i < 3; i++) {
-            GameObject tank = Instantiate(tankPrefabs[0]);
-            tank.transform.position = tank.transform.position + new Vector3(3 * (i + 1), 0, 0);
-            tank.transform.parent = enemiesFolder;
-        }
+        // player = Instantiate(playerPrefab);
+        // for (int i = 0; i < 3; i++) {
+        //     GameObject tank = Instantiate(tankPrefabs[0]);
+        //     tank.transform.position = tank.transform.position + new Vector3(3 * (i + 1), 0, 0);
+        //     tank.transform.parent = enemiesFolder;
+        // }
         StartCoroutine(WaitForLevelEnd());
     }
 

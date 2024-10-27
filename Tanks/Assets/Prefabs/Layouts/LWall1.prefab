@@ -361,6 +361,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6019692817117172194}
     m_Modifications:
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: xQuadrant
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: zQuadrant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7834740079805797028, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
       propertyPath: m_Name
       value: TankSpawn
@@ -547,6 +555,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6019692817117172194}
     m_Modifications:
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: xQuadrant
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: zQuadrant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7834740079805797028, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
       propertyPath: m_Name
       value: TankSpawn (2)
@@ -609,6 +625,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6019692817117172194}
     m_Modifications:
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: xQuadrant
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: zQuadrant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7834740079805797028, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
       propertyPath: m_Name
       value: TankSpawn (1)
@@ -733,6 +757,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6019692817117172194}
     m_Modifications:
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: xQuadrant
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860941629833844246, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
+      propertyPath: zQuadrant
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7834740079805797028, guid: 5b124da3896fbd045bf8a4fef12d73f2, type: 3}
       propertyPath: m_Name
       value: TankSpawn (3)
