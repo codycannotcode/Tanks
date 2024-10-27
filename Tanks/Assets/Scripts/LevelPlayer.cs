@@ -5,8 +5,6 @@ using UnityEngine;
 public class LevelPlayer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject levelPrefab;
-    [SerializeField]
     private GameObject playerPrefab;
     [SerializeField]
     private List<GameObject> tankPrefabs;
@@ -23,7 +21,7 @@ public class LevelPlayer : MonoBehaviour
     }
 
     void Load() {
-        levelGenerator.Generate(levelPrefab);
+        levelGenerator.Generate();
         player = Instantiate(playerPrefab);
         for (int i = 0; i < 3; i++) {
             GameObject tank = Instantiate(tankPrefabs[0]);

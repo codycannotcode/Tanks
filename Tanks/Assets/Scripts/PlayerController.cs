@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private const float RaycastPlaneHeight = 0.69f;
     private Tank tank;
     private Vector3 movementDirection;
+    private Plane raycastPlane;
     // Start is called before the first frame update
     void Start()
     {
+        raycastPlane = new Plane(Vector3.up, -RaycastPlaneHeight);
         tank = GetComponent<Tank>();
     }
 
@@ -24,8 +27,9 @@ public class PlayerController : MonoBehaviour
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo)) {
-            Vector3 aimDirection = hitInfo.point - transform.position;
+        if (raycastPlane.Raycast(ray, out float enter)) {
+            Vector3 target = ray.origin + ray.direction * enter;
+            Vector3 aimDirection = target - transform.position;
             aimDirection.y = 0;
             tank.SetAimDirection(aimDirection);
         }
