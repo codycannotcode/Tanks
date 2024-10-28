@@ -3,36 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelPlayer : MonoBehaviour
-{
-    [SerializeField]
-    private GameObject playerPrefab;
-    [SerializeField]
-    private List<GameObject> tankPrefabs;
-    
+{   
     private LevelGenerator levelGenerator;
+    private Level currentLevel;   
     
-    private GameObject player;
-    private Transform enemiesFolder;
     
     void Start() {
-        enemiesFolder = GameObject.Find("Enemies").transform;
         levelGenerator = GetComponent<LevelGenerator>();
-        Load();
+        StartCoroutine(Load());
     }
 
-    void Load() {
-        levelGenerator.Generate();
-        // player = Instantiate(playerPrefab);
-        // for (int i = 0; i < 3; i++) {
-        //     GameObject tank = Instantiate(tankPrefabs[0]);
-        //     tank.transform.position = tank.transform.position + new Vector3(3 * (i + 1), 0, 0);
-        //     tank.transform.parent = enemiesFolder;
-        // }
+    IEnumerator Load() {
+        currentLevel = levelGenerator.Generate(2);
+        yield return new WaitForSeconds(1);
+        Debug.Log("start");
+        currentLevel.SetActive(true);
+
         StartCoroutine(WaitForLevelEnd());
     }
 
     IEnumerator WaitForLevelEnd() {
-        yield return new WaitUntil(() => player == null || enemiesFolder.childCount <= 0);
+        yield return new WaitUntil(() => currentLevel.Complete);
         Debug.Log("chungus");
     }
 }

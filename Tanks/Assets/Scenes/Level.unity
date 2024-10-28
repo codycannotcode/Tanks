@@ -808,37 +808,6 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!1 &1123845852
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1123845853}
-  m_Layer: 0
-  m_Name: Enemies
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1123845853
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1123845852}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171470390
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layouts: {fileID: 11400000, guid: 9275b803312031546a5336fffe541367, type: 2}
+  tankPrefabs: {fileID: 11400000, guid: 52fad247636f44c4eb73666639fb1f6b, type: 2}
 --- !u!114 &1171470395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,10 +899,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8baa87cce144e14c9bd4576c62915c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1172238131177190298, guid: 9d58dc51871658c4dbe270f35be54ccc, type: 3}
-  tankPrefabs:
-  - {fileID: 760031578385011230, guid: b02c8c8d0b94fa940956424b31abc92f, type: 3}
-  - {fileID: 4230902771149637000, guid: 7ab95eb01ad273f42b2c824cecc8c2dc, type: 3}
 --- !u!1 &1693677110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,4 +1048,3 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 1866456940}
   - {fileID: 1693677114}
-  - {fileID: 1123845853}

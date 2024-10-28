@@ -1,3 +1,4 @@
+using static System.Math;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -8,6 +9,8 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField]
     private LayoutData layouts;
+    [SerializeField]
+    private TankData tankPrefabs;
     private NavMeshSurface navMeshSurface;
     private GameObject level;
 
@@ -16,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
         navMeshSurface = GetComponent<NavMeshSurface>();
     }
 
-    public void Generate() {
+    public Level Generate(int enemyCount) {
         GameObject level = new GameObject("Levels");
         int[,] tiles = new int[2,2];
 
@@ -25,7 +28,7 @@ public class LevelGenerator : MonoBehaviour
         //attempt to fill out tiles, iterate 4 times at most since all tiles will be filled with <= 4 layouts
         for (int i = 0; i < 4 && availableSizes.Count > 0; i++) {
             string sizeChoice = availableSizes[Random.Range(0, availableSizes.Count)];
-            Debug.Log("choice: " + sizeChoice);
+            // Debug.Log("choice: " + sizeChoice);
             switch (sizeChoice) {
                 case "1x1":
                 Choose1x1(tiles, availableSizes, level);
@@ -51,6 +54,39 @@ public class LevelGenerator : MonoBehaviour
         }
 
         navMeshSurface.BuildNavMesh();
+
+        //choose a random quadrant to place the player in, prioritize placing enemy tanks in other quadrants
+        int[] playerQuadrant = new int[]{Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : -1};
+        List<Vector3> spawnPositions = new List<Vector3>();
+        List<Vector3> playerQuadrantPositions = new List<Vector3>();
+
+        foreach (TankSpawn spawn in level.GetComponentsInChildren<TankSpawn>()) {
+            Vector3 position = spawn.transform.position;
+            if (Sign(position.x) != Sign(playerQuadrant[0]) || Sign(position.z) != Sign(playerQuadrant[1])) {
+                spawnPositions.Insert(Random.Range(0, spawnPositions.Count + 1), spawn.transform.position);
+            } else {
+                playerQuadrantPositions.Insert(Random.Range(0, playerQuadrantPositions.Count + 1), spawn.transform.position);
+            }
+            Destroy(spawn.gameObject);
+        }
+
+        GameObject enemiesFolder = new GameObject("Enemies");
+        for (int i = 0; i < enemyCount; i++) {
+            GameObject tankChoice = tankPrefabs.weakTanks[Random.Range(0, tankPrefabs.weakTanks.Count)];
+            Vector3 position = spawnPositions[spawnPositions.Count - 1];
+            spawnPositions.RemoveAt(spawnPositions.Count - 1);
+            position.y = tankChoice.transform.position.y;
+
+            tankChoice = Instantiate(tankChoice, enemiesFolder.transform);
+            tankChoice.transform.position = position;
+        }
+
+        GameObject playerTank = Instantiate(tankPrefabs.playerTank);
+        Vector3 playerPosition = playerQuadrantPositions[0];
+        playerPosition.y = playerTank.transform.position.y;
+        playerTank.transform.position = playerPosition;
+
+        return new Level(level, playerTank, enemiesFolder);
     }
 
     void Choose1x1(int[,] tiles, List<string> availableSizes, GameObject level) {
@@ -205,6 +241,8 @@ public class Level
     private GameObject level;
     private GameObject playerTank;
     private GameObject enemiesFolder;
+    public bool Complete { get {return playerTank == null || enemiesFolder.transform.childCount <= 0;} }
+    public bool PlayerIsAlive { get {return playerTank != null;} }
 
     public Level(GameObject level, GameObject playerTank, GameObject enemiesFolder) {
         this.level = level;
