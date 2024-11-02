@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelPlayer : MonoBehaviour
 {   
     private LevelGenerator levelGenerator;
-    private Level currentLevel;   
+    public Level currentLevel;   
     
     
     void Start() {
@@ -14,7 +17,7 @@ public class LevelPlayer : MonoBehaviour
     }
 
     IEnumerator Load() {
-        currentLevel = levelGenerator.Generate(2);
+        currentLevel = levelGenerator.Generate(PlayerStats.level);
         yield return new WaitForSeconds(1);
         Debug.Log("start");
         currentLevel.SetActive(true);
@@ -24,6 +27,22 @@ public class LevelPlayer : MonoBehaviour
 
     IEnumerator WaitForLevelEnd() {
         yield return new WaitUntil(() => currentLevel.Complete);
-        Debug.Log("chungus");
+        
+        if (currentLevel.PlayerIsAlive) {
+            currentLevel.SetActive(false);
+            yield return new WaitForSeconds(1);
+            Debug.Log(String.Format("Level {0} Completed", PlayerStats.level));
+            currentLevel.Destroy();
+            NextLevel();
+        }
+        else {
+            currentLevel.SetActive(false);
+            currentLevel.Destroy();
+        }
+    }
+
+    void NextLevel() {
+        PlayerStats.level++;
+        SceneManager.LoadScene("Transition");
     }
 }

@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour, Hittable
     [SerializeField]
     private int bounces;
     public int Bounces { get {return bounces;} }
+    private LevelPlayer levelPlayer;
     
     private static int layerMask;
     private static float thickness = 0.125f;
@@ -21,10 +22,14 @@ public class Bullet : MonoBehaviour, Hittable
     public void OnHit() {}
     void Start() {
         layerMask = LayerMask.GetMask("Walls");
+        levelPlayer = FindAnyObjectByType<LevelPlayer>();
     }
 
     void Update()
     {
+        if (levelPlayer.currentLevel.Complete) {
+            enabled = false;
+        }
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 

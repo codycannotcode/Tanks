@@ -253,14 +253,20 @@ public class Level
     }
 
     public void SetActive(bool active) {
-        playerTank.GetComponent<Tank>().enabled = active;
-        playerTank.GetComponent<PlayerController>().enabled = active;
+        if (playerTank != null) {
+            playerTank.GetComponent<Tank>().enabled = active;
+            playerTank.GetComponent<PlayerController>().enabled = active;
+        }
 
-        foreach (Tank tank in enemiesFolder.GetComponentsInChildren<Tank>(true)) {
-            tank.enabled = active;
+
+        foreach (MonoBehaviour script in enemiesFolder.GetComponentsInChildren<MonoBehaviour>()) {
+            script.enabled = active;
         }
-        foreach (NavMeshAgent agent in enemiesFolder.GetComponentsInChildren<NavMeshAgent>(true)) {
-            agent.enabled = active;
-        }
+    }
+
+    public void Destroy() {
+        Object.Destroy(level);
+        Object.Destroy(playerTank);
+        Object.Destroy(enemiesFolder);
     }
 }
