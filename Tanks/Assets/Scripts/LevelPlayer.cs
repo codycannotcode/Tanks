@@ -17,7 +17,13 @@ public class LevelPlayer : MonoBehaviour
     }
 
     IEnumerator Load() {
-        currentLevel = levelGenerator.Generate(PlayerStats.level);
+        // if (SessionStats.Replay) {
+        //     currentLevel = levelGenerator.Generate(SessionStats.OriginalPositions, SessionStats.PlayerPosition);
+        // }
+        // else {
+        //     currentLevel = levelGenerator.Generate(5);
+        // }
+        currentLevel = levelGenerator.Generate(5);
         yield return new WaitForSeconds(1);
         Debug.Log("start");
         currentLevel.SetActive(true);
@@ -31,18 +37,33 @@ public class LevelPlayer : MonoBehaviour
         if (currentLevel.PlayerIsAlive) {
             currentLevel.SetActive(false);
             yield return new WaitForSeconds(1);
-            Debug.Log(String.Format("Level {0} Completed", PlayerStats.level));
-            currentLevel.Destroy();
             NextLevel();
         }
         else {
             currentLevel.SetActive(false);
-            currentLevel.Destroy();
+            SessionStats.Lives--;
+            yield return new WaitForSeconds(1);
+            if (SessionStats.Lives <= 0) {
+                GameOver();
+            }
+            else {
+                ReplayLevel();
+            }
         }
     }
 
     void NextLevel() {
-        PlayerStats.level++;
+        SessionStats.Level++;
         SceneManager.LoadScene("Transition");
+    }
+
+    void ReplayLevel() {
+        SceneManager.LoadScene("Transition");
+    }
+
+    void GameOver() {
+        Debug.Log("Game over");
+        SessionStats.Reset();
+        SceneManager.LoadScene("StartMenu");
     }
 }

@@ -7,11 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransition : MonoBehaviour
 {
-    private TextMeshProUGUI text;
+    private TextMeshProUGUI levelText;
+    private TextMeshProUGUI livesText;
     void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
-        text.text = String.Format("Level {0}", PlayerStats.level);
+        levelText = transform.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        levelText.text = String.Format("Level {0}", SessionStats.Level);
+
+        livesText = transform.Find("LivesText").GetComponent<TextMeshProUGUI>();
+        livesText.text = String.Format("Lives: {0}", SessionStats.Lives);
 
         StartCoroutine(StartLevel());
     }

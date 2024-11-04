@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private TankData tankPrefabs;
     private NavMeshSurface navMeshSurface;
-    private GameObject level;
 
     void Awake()
     {
@@ -234,20 +234,46 @@ public class LevelGenerator : MonoBehaviour
             child.transform.position = Vector3.Scale(child.transform.position, flipVector);
         }
     }
+
+    public Level Generate(Dictionary<GameObject, Vector3> enemyPositions, Vector3 playerPosition) {
+        GameObject level = GameObject.Find("Levels");
+        
+        navMeshSurface.BuildNavMesh();
+
+        GameObject enemiesFolder = GameObject.Find("Enemies");
+        foreach (Transform enemyTransform in enemiesFolder.transform) {
+            Vector3 position = enemyPositions[enemyTransform.gameObject];
+            enemyTransform.SetPositionAndRotation(position, new Quaternion());
+        }
+
+        GameObject playerTank = Instantiate(tankPrefabs.playerTank);
+        playerTank.transform.position = playerPosition;
+
+        return new Level(level, playerTank, enemiesFolder);
+    }
 }
 
 public class Level
 {
-    private GameObject level;
+    private GameObject layout;
     private GameObject playerTank;
-    private GameObject enemiesFolder;
-    public bool Complete { get {return playerTank == null || enemiesFolder.transform.childCount <= 0;} }
+    public GameObject EnemiesFolder;
+    public Vector3 PlayerOriginalPosition;
+    public Dictionary<GameObject, Vector3> OriginalPositions;
+    public GameObject Layout { get {return layout;} }
+    public bool Complete { get {return playerTank == null || EnemiesFolder.transform.childCount <= 0;} }
     public bool PlayerIsAlive { get {return playerTank != null;} }
 
-    public Level(GameObject level, GameObject playerTank, GameObject enemiesFolder) {
-        this.level = level;
+    public Level(GameObject layout, GameObject playerTank, GameObject enemiesFolder) {
+        this.layout = layout;
         this.playerTank = playerTank;
-        this.enemiesFolder = enemiesFolder;
+        this.EnemiesFolder = enemiesFolder;
+        OriginalPositions = new Dictionary<GameObject, Vector3>();
+
+        PlayerOriginalPosition = playerTank.transform.position;
+        foreach (Transform enemyTransform in enemiesFolder.transform) {
+            OriginalPositions[enemyTransform.gameObject] = enemyTransform.position;
+        }
 
         SetActive(false);
     }
@@ -258,15 +284,30 @@ public class Level
             playerTank.GetComponent<PlayerController>().enabled = active;
         }
 
-
-        foreach (MonoBehaviour script in enemiesFolder.GetComponentsInChildren<MonoBehaviour>()) {
+        foreach (MonoBehaviour script in EnemiesFolder.GetComponentsInChildren<MonoBehaviour>()) {
             script.enabled = active;
+        }
+        foreach (NavMeshAgent agent in EnemiesFolder.GetComponentsInChildren<NavMeshAgent>()) {
+            agent.enabled = active;
         }
     }
 
     public void Destroy() {
-        Object.Destroy(level);
+        Object.Destroy(layout);
         Object.Destroy(playerTank);
-        Object.Destroy(enemiesFolder);
+        Object.Destroy(EnemiesFolder);
     }
+
+    // public Dictionary<Vector3, GameObject> GetRemainingTanks() {
+    //     Dictionary<Vector3, GameObject> remainingTanks = new Dictionary<Vector3, GameObject>();
+
+    //     foreach (Transform enemyTransform in enemiesFolder.transform) {
+    //         if (OriginalPositions.ContainsKey(enemyTransform.gameObject)) {
+    //             Debug.Log(enemyTransform.gameObject);
+    //             Debug.Log(PrefabUtility.GetCorrespondingObjectFromSource(enemyTransform.gameObject));
+    //             remainingTanks[OriginalPositions[enemyTransform.gameObject]] = PrefabUtility.GetCorrespondingObjectFromSource(enemyTransform.gameObject);
+    //         }
+    //     }
+    //     return remainingTanks;
+    // }
 }

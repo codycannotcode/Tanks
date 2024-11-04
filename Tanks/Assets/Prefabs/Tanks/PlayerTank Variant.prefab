@@ -48,6 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3171723277283308319, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bb9aaff8b7433f45aa9e03a06328db4, type: 2}
+    - target: {fileID: 3171723277283308319, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea92164e4973c744cb58cbe35bee0a9e, type: 2}
+    - target: {fileID: 3544149482388605197, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea92164e4973c744cb58cbe35bee0a9e, type: 2}
+    - target: {fileID: 3544149482388605197, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3bb9aaff8b7433f45aa9e03a06328db4, type: 2}
     - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
       propertyPath: m_Name
       value: PlayerTank Variant
@@ -76,6 +92,10 @@ PrefabInstance:
       propertyPath: reloadTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7103724952168534427, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6064659003114813775, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
     m_RemovedComponents:
     - {fileID: 4891039800278899808, guid: 143224c2d38be5d4e992071894c61193, type: 3}
     m_RemovedGameObjects: []
