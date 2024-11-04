@@ -21,6 +21,7 @@ public class Tank : MonoBehaviour, Hittable
     private Quaternion targetAim;
     private bool projectileQueued; // used to fire projectiles after the tank is finished rotating
     public bool reloaded { get; private set; }
+    public float Speed { get { return speed;} }
 
     public GameObject Projectile { get {return projectilePrefab;} }
 

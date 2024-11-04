@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 1171470394}
   - component: {fileID: 1171470395}
   m_Layer: 0
-  m_Name: LevelGenerator
+  m_Name: LevelPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

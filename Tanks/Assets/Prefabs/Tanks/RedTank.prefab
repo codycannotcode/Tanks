@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6986658562756342039
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269642420738454615, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171723277283308319, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1df85c0ac9b31594fa15c1b2475b4057, type: 2}
+    - target: {fileID: 3544149482388605197, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1df85c0ac9b31594fa15c1b2475b4057, type: 2}
+    - target: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: m_Name
+      value: RedTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103724952168534427, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      propertyPath: reloadTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 79603326689397123}
+    - targetCorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3164621116345857990}
+  m_SourcePrefab: {fileID: 100100000, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+--- !u!1 &6233654378103884980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3924881934235778467, guid: 143224c2d38be5d4e992071894c61193, type: 3}
+  m_PrefabInstance: {fileID: 6986658562756342039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &79603326689397123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233654378103884980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d3824e1995e5c49b380ee70f5fc820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calculateRicochet: 0
+  angleVariation: 15
+--- !u!114 &3164621116345857990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233654378103884980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54fa0429633c6e4a8bccd5773c6070d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

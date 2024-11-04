@@ -16,5 +16,10 @@ MonoBehaviour:
   weakTanks:
   - {fileID: 760031578385011230, guid: b02c8c8d0b94fa940956424b31abc92f, type: 3}
   - {fileID: 4230902771149637000, guid: 7ab95eb01ad273f42b2c824cecc8c2dc, type: 3}
-  regularTanks: []
-  strongTanks: []
+  regularTanks:
+  - {fileID: 6233654378103884980, guid: fab8a1c7091d0604297c37a119363947, type: 3}
+  - {fileID: 5885461463263915382, guid: f726b49d9e7c7de48ab5c3a32de5ab32, type: 3}
+  - {fileID: 3674905526710367613, guid: c5d9eda42f43bd54e88c105f6a9fa8e3, type: 3}
+  strongTanks:
+  - {fileID: 6925507216864351823, guid: 459db5d42f356924483ab3b98454b2cf, type: 3}
+  - {fileID: 1190808186326242788, guid: e66122e245702e941b7a03f02ac08446, type: 3}

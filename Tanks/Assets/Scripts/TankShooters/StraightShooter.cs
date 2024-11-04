@@ -22,7 +22,7 @@ public class StraightShooter : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("LevelPlayer").GetComponent<LevelPlayer>().currentLevel.PlayerTank;
         tank = GetComponent<Tank>();
         layerMask = LayerMask.GetMask("Tanks", "Walls");
         tankHead = transform.Find("Head").gameObject;

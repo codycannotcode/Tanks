@@ -19,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
         navMeshSurface = GetComponent<NavMeshSurface>();
     }
 
-    public Level Generate(int enemyCount) {
+    public Level Generate(int levelNumber) {
         GameObject level = new GameObject("Levels");
         int[,] tiles = new int[2,2];
 
@@ -71,8 +71,62 @@ public class LevelGenerator : MonoBehaviour
         }
 
         GameObject enemiesFolder = new GameObject("Enemies");
-        for (int i = 0; i < enemyCount; i++) {
+        // see notes for specifics
+        // each tier of tank is assigned a point worth
+        // based on the level, there is a different probability of each tier spawning
+        // based on the level, there is a point total
+
+        int points;
+        if (levelNumber < 5) {
+            points = levelNumber;
+        }
+        else if (5 <= levelNumber && levelNumber <= 10) {
+            points = 4;
+        }
+        else {
+            points = (int)(levelNumber / 2.5f);
+        }
+
+        // {weak, regular, strong}
+        int[] weights = new int[] {2, 0, 0};
+        weights[1] = System.Math.Min(6, levelNumber / 5);
+        weights[2] = System.Math.Max(0, levelNumber - 15) / 5;
+
+        for (int i = 0; i < 12 && points > 0; i++) {
+            if (points < 4) {
+                weights[2] = 0;
+            }
+            else if (points < 2) {
+                weights[1] = 0;
+            }
+            // string w = System.String.Format("{0}, {1}, {2}", weights[0], weights[1], weights[2]);
+            // Debug.Log(w);
+
+            int tankType = 0;
+            int random = Random.Range(1, weights[0] + weights[1] + weights[2]);
+            if (random <= weights[0]) {
+                tankType = 0; //weak
+                points -= 1;
+            }
+            else if (random > weights[0] && random <= weights[0] + weights[1]) {
+                tankType = 1; //regular
+                points -= 2;
+            }
+            else {
+                tankType = 2; //strong
+                points -= 4;
+            }
+
             GameObject tankChoice = tankPrefabs.weakTanks[Random.Range(0, tankPrefabs.weakTanks.Count)];
+            switch (tankType) {
+                case 1:
+                tankChoice = tankPrefabs.regularTanks[Random.Range(0, tankPrefabs.regularTanks.Count)];
+                    break;
+                case 2:
+                tankChoice = tankPrefabs.strongTanks[Random.Range(0, tankPrefabs.strongTanks.Count)];
+                    break;
+            }
+            
             Vector3 position = spawnPositions[spawnPositions.Count - 1];
             spawnPositions.RemoveAt(spawnPositions.Count - 1);
             position.y = tankChoice.transform.position.y;
@@ -256,17 +310,17 @@ public class LevelGenerator : MonoBehaviour
 public class Level
 {
     private GameObject layout;
-    private GameObject playerTank;
+    public GameObject PlayerTank;
     public GameObject EnemiesFolder;
     public Vector3 PlayerOriginalPosition;
     public Dictionary<GameObject, Vector3> OriginalPositions;
     public GameObject Layout { get {return layout;} }
-    public bool Complete { get {return playerTank == null || EnemiesFolder.transform.childCount <= 0;} }
-    public bool PlayerIsAlive { get {return playerTank != null;} }
+    public bool Complete { get {return PlayerTank == null || EnemiesFolder.transform.childCount <= 0;} }
+    public bool PlayerIsAlive { get {return PlayerTank != null;} }
 
     public Level(GameObject layout, GameObject playerTank, GameObject enemiesFolder) {
         this.layout = layout;
-        this.playerTank = playerTank;
+        this.PlayerTank = playerTank;
         this.EnemiesFolder = enemiesFolder;
         OriginalPositions = new Dictionary<GameObject, Vector3>();
 
@@ -279,9 +333,9 @@ public class Level
     }
 
     public void SetActive(bool active) {
-        if (playerTank != null) {
-            playerTank.GetComponent<Tank>().enabled = active;
-            playerTank.GetComponent<PlayerController>().enabled = active;
+        if (PlayerTank != null) {
+            PlayerTank.GetComponent<Tank>().enabled = active;
+            PlayerTank.GetComponent<PlayerController>().enabled = active;
         }
 
         foreach (MonoBehaviour script in EnemiesFolder.GetComponentsInChildren<MonoBehaviour>()) {
@@ -294,7 +348,7 @@ public class Level
 
     public void Destroy() {
         Object.Destroy(layout);
-        Object.Destroy(playerTank);
+        Object.Destroy(PlayerTank);
         Object.Destroy(EnemiesFolder);
     }
 

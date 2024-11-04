@@ -1,0 +1,46 @@
+weak tank: 1 point
+regular tank: 2 point
+strong tank: 4 point
+
+probabilities
+weak weight: 1
+regular weight: max(6, level / 5)
+strong weight: max(0, level - 15) / 5
+
+level 1-5
+2 0 0
+
+level 5
+2 1 0
+
+level 10
+2 2 0
+
+level 15
+2 3 0
+
+level 20
+
+2 4 1
+
+level 25
+
+2 5 2
+
+level 30
+
+2 6 3
+
+35
+2 6 4
+
+40
+2 6 5
+
+points:
+1:
+1
+
+2-5:
+2
+

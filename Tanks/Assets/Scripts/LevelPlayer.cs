@@ -17,13 +17,7 @@ public class LevelPlayer : MonoBehaviour
     }
 
     IEnumerator Load() {
-        // if (SessionStats.Replay) {
-        //     currentLevel = levelGenerator.Generate(SessionStats.OriginalPositions, SessionStats.PlayerPosition);
-        // }
-        // else {
-        //     currentLevel = levelGenerator.Generate(5);
-        // }
-        currentLevel = levelGenerator.Generate(5);
+        currentLevel = levelGenerator.Generate(SessionStats.Level);
         yield return new WaitForSeconds(1);
         Debug.Log("start");
         currentLevel.SetActive(true);

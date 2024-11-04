@@ -11,9 +11,24 @@ public class BasicMover : MonoBehaviour
     private float[] moveDelay = {0f, 1f};
     private Tank tank;
     private NavMeshAgent agent;
-    
+
+    void Start()
+    {
+        tank = GetComponent<Tank>();
+
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = tank.Speed;
+        agent.angularSpeed = 0;
+        agent.updateRotation = false;
+
+        StartCoroutine(ChooseNewTarget());
+    }
+
     void SetTarget(Vector3 destination)
     {
+        if (!agent.isOnNavMesh) {
+            return;
+        }
         target = destination;
         agent.isStopped = false;
         agent.SetDestination(target);
@@ -44,18 +59,6 @@ public class BasicMover : MonoBehaviour
 
         yield return new WaitUntil(() => !moving);
         yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
-        StartCoroutine(ChooseNewTarget());
-    }
-
-    void Start()
-    {
-        tank = GetComponent<Tank>();
-
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = 3;
-        agent.angularSpeed = 0;
-        agent.updateRotation = false;
-
         StartCoroutine(ChooseNewTarget());
     }
 

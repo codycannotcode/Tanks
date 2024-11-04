@@ -15,8 +15,26 @@ public class SeekingMover : MonoBehaviour
     private Tank tank;
     private NavMeshAgent agent;
 
+    void Start()
+    {
+        layerMask = LayerMask.GetMask("Tanks", "Walls");
+
+        player = GameObject.Find("LevelPlayer").GetComponent<LevelPlayer>().currentLevel.PlayerTank;
+        tank = GetComponent<Tank>();
+        
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = tank.Speed;
+        agent.angularSpeed = 0;
+        agent.updateRotation = false;
+
+        StartCoroutine(TrackPlayer());
+    }
+
     void SetTarget(Vector3 destination)
     {
+        if (!agent.isOnNavMesh) {
+            return;
+        }
         target = destination;
         agent.isStopped = false;
         agent.SetDestination(target);
@@ -24,7 +42,7 @@ public class SeekingMover : MonoBehaviour
     }
 
     IEnumerator TrackPlayer() {
-        while (!canSeePlayer) {
+        while (!canSeePlayer && player != null) {
             SetTarget(player.transform.position);
             yield return null;
         }
@@ -41,25 +59,8 @@ public class SeekingMover : MonoBehaviour
             SetTarget(result);
 
             yield return new WaitUntil(() => !moving);
-            Debug.Log("1");
             yield return new WaitForSeconds(Random.Range(moveDelay[0], moveDelay[1]));
-            Debug.Log("2");
         }
-        StartCoroutine(TrackPlayer());
-    }
-
-    void Start()
-    {
-        layerMask = LayerMask.GetMask("Tanks", "Walls");
-
-        player = GameObject.Find("Player");
-        tank = GetComponent<Tank>();
-        
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = 3;
-        agent.angularSpeed = 0;
-        agent.updateRotation = false;
-
         StartCoroutine(TrackPlayer());
     }
 
