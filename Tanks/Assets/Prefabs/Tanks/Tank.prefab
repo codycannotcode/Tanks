@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6064659003114813775, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
   bombPrefab: {fileID: 2482545000612290218, guid: 968727eb2a50d2e46adb352edcc0699d, type: 3}
+  shockwavePrefab: {fileID: 972334203287886028, guid: ce09772e879796b44b751dde5ba930a9, type: 3}
   speed: 3
   reloadTime: 2
 --- !u!195 &4891039800278899808

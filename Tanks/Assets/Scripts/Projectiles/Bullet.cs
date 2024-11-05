@@ -9,6 +9,12 @@ public interface Hittable
 
 public class Bullet : MonoBehaviour, Hittable
 {
+    private AudioSource audioSource;
+    
+    [SerializeField]
+    private AudioClip bounceSound;
+    [SerializeField]
+    private AudioClip brokeSound;
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -21,6 +27,7 @@ public class Bullet : MonoBehaviour, Hittable
 
     public void OnHit() {}
     void Start() {
+        audioSource = Camera.main.GetComponent<AudioSource>();
         layerMask = LayerMask.GetMask("Walls");
         levelPlayer = FindAnyObjectByType<LevelPlayer>();
     }
@@ -38,11 +45,13 @@ public class Bullet : MonoBehaviour, Hittable
         Hittable hittable = collision.gameObject.GetComponent<Hittable>();
         if (hittable != null) {
             hittable.OnHit();
+            audioSource.PlayOneShot(brokeSound, 0.1f);
             Destroy(gameObject);
         }
         else {
             // If the collision is not a hittable, then we know we hit a wall
             if (bounces <= 0) {
+                audioSource.PlayOneShot(brokeSound, 0.1f);
                 Destroy(gameObject);
             }
             else {
@@ -52,6 +61,8 @@ public class Bullet : MonoBehaviour, Hittable
 
                 transform.rotation = Quaternion.LookRotation(reflection);
                 bounces--;
+
+                audioSource.PlayOneShot(bounceSound, 0.3f);
             }
         }
     }

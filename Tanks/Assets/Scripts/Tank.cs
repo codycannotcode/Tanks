@@ -9,6 +9,8 @@ public class Tank : MonoBehaviour, Hittable
     private GameObject projectilePrefab;
     [SerializeField]
     private GameObject bombPrefab;
+    [SerializeField]
+    private GameObject shockwavePrefab;
 
     [SerializeField]
     private float speed;
@@ -106,6 +108,7 @@ public class Tank : MonoBehaviour, Hittable
     }
 
     public void OnHit() {
+        Instantiate(shockwavePrefab, transform.position, new Quaternion());
         Destroy(gameObject);
     }
 

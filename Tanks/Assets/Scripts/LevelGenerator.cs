@@ -103,7 +103,7 @@ public class LevelGenerator : MonoBehaviour
             // Debug.Log(w);
 
             int tankType = 0;
-            int random = Random.Range(1, weights[0] + weights[1] + weights[2]);
+            int random = Random.Range(1, weights[0] + weights[1] + weights[2] + 1);
             if (random <= weights[0]) {
                 tankType = 0; //weak
                 points -= 1;

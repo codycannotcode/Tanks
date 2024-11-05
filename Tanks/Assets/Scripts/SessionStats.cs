@@ -19,7 +19,7 @@ public static class SessionStats
     }
 
     public static void Reset() {
-        Level = 1;
+        Level = 30;
         DestroyCount = new Dictionary<GameObject, int>();
         Lives = 3;
 

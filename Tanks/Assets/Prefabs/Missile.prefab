@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8365408246634162251, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 11cdba5491c335a42a4dfec1f5615579, type: 3}
     - target: {fileID: 2020115502989167794, guid: cb361491c5cac6c419d9602dba37768d, type: 3}
       propertyPath: m_Parameters.colorGradient.ctime1
       value: 7633

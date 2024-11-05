@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour, Hittable
 {
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip explosionSound;
     [SerializeField]
     private GameObject explosionObject;
     private float explosionTime = 5; // seconds until the bomb explodes
@@ -12,6 +16,7 @@ public class Bomb : MonoBehaviour, Hittable
     
     void Start()
     {
+        audioSource = Camera.main.GetComponent<AudioSource>();
         layerMask = LayerMask.GetMask("Tanks", "Bombs", "Walls");
         StartCoroutine(PrepareToExplode());
     }
@@ -36,6 +41,8 @@ public class Bomb : MonoBehaviour, Hittable
     }
 
     void Explode() {
+        audioSource.PlayOneShot(explosionSound, 0.5f);
+
         GetComponent<Collider>().enabled = false;
         Destroy(gameObject);
 
